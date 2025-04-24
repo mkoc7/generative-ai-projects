@@ -1,0 +1,15 @@
+# Gerekli kütüphaneleri içe aktar 🛠️
+from transformers import pipeline  
+
+# Şiir oluşturmak için Hugging Face'in text-generation pipeline'ını kullan ✨
+def generate_poem(theme):
+    generator = pipeline("text-generation", model="gpt2")  # GPT-2 modeli
+    prompt = f"Write a poem about {theme}"  # Kullanıcının temasını şablona ekle 🎵
+    poems = generator(prompt, max_length=50, num_return_sequences=1)  # Şiir üret
+    return poems[0]['generated_text']  # Üretilen şiiri döndür 🚀
+
+# Kullanıcıdan tema al ve şiir oluştur 🌟
+if __name__ == "__main__":
+    user_theme = input("Enter a theme for your poem: ")  # Kullanıcı girdisi 🎤
+    print("\nHere is your poem: \n")  # Şiir başlığı 📜
+    print(generate_poem(user_theme))  # Şiiri yazdır 🎉
