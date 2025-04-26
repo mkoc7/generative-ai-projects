@@ -1,0 +1,27 @@
+# We'll use the 'random' module again for random selections 🎲
+import random # Import the module needed for random choices. 📚
+
+# Let's prepare our lists (our dataset) for recipe ideas ✍️🍲
+proteins = ["Chicken 🍗", "Ground Meat 🥩", "Eggs 🍳", "Lentils 🌱", "Fish 🐟", "Tofu ⬜"] # The main star of the dish 💪
+veggies_carbs = ["Potatoes 🥔", "Rice 🍚", "Pasta 🍝", "Onion 🧅", "Tomato 🍅", "Pepper 🌶️", "Broccoli 🥦"] # Companions to the main star 🤝
+cooking_methods = ["Oven-baked 🔥", "Pan-fried 🍳", "Boiled 💧", "Sautéed 🥢", "Grilled ♨️"] # How we'll prepare the meal 🧑‍🍳
+extras_spices = ["With Yogurt 🍦", "With Tomato Sauce 🍅", "Spicy ✨", "With Garlic 🧄", "Lemony 🍋", "With Olive Oil 🌿"] # Touches that enhance flavor ✨
+
+# Let's randomly select an item from each list (Extra is optional) 🤔➡️💡
+chosen_protein = random.choice(proteins) # Selected a main ingredient. 🎰
+chosen_side = random.choice(veggies_carbs) # Selected a side ingredient. 🎰
+chosen_method = random.choice(cooking_methods) # Selected a cooking method. 🎰
+# Let's also randomly decide whether to add an extra (e.g., 50% chance)
+add_extra = random.choice([True, False]) # Flipping a coin: Add an extra or not? 🪙
+chosen_extra = "" # Extra is empty initially.
+if add_extra: # If the coin flip is True...
+    chosen_extra = random.choice(extras_spices) # Let's pick an extra! 🎉
+
+# Combine the selections to form the recipe idea 💡🍲✍️
+recipe_idea = f"{chosen_method} {chosen_protein} and {chosen_side}" # Formed the main idea.
+if chosen_extra: # If an extra was chosen...
+    recipe_idea += f", maybe {chosen_extra}?" # Let's add the extra to the idea. 😉
+
+# Print the generated recipe idea to the screen 🎉💻👀
+print("Stop wondering what to cook! 🤔 Here's an idea:") # Message to the user. 👋
+print(recipe_idea) # Show the generated recipe idea. 🖥️
