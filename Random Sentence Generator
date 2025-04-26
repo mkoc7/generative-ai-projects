@@ -1,0 +1,19 @@
+# Import the necessary library (the random module allows us to make random choices) 🎲
+import random # This line imports Python's 'random' library to make random selections. 📚
+
+# Define our word lists (our dataset) ✍️
+subjects = ["Cat 🐈", "Dog 🐕", "Man 👨", "Woman 👩", "Robot 🤖"] # Words indicating who the sentence is about 🤔
+verbs = ["ate 😋", "saw 👀", "coded 💻", "loved ❤️", "chased 🏃"] # Words indicating the action in the sentence 💪
+objects = ["the ball ⚽", "the fish 🐟", "the pizza 🍕", "the book 📖", "the computer 🖱️"] # Words indicating what is affected by the action 🎯
+
+# Choose a random word from each list 🤔➡️💡
+random_subject = random.choice(subjects) # Selects a random item from the 'subjects' list. 🎰
+random_verb = random.choice(verbs) # Selects a random item from the 'verbs' list. 🎰
+random_object = random.choice(objects) # Selects a random item from the 'objects' list. 🎰
+
+# Combine the chosen words to form the sentence ✨➕✨=📜
+sentence = f"{random_subject} {random_verb} {random_object}." # Joins the selected words with spaces and adds a period at the end. 📝
+
+# Print the generated sentence to the screen 🎉💻👀
+print("Here is your random sentence:") # Displays a message to the user. 👋
+print(sentence) # Prints the generated sentence to the console. 🖥️
