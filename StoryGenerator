@@ -1,0 +1,55 @@
+import torch
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+class StoryGenerator:
+    def __init__(self):
+        print("Model yükleniyor...")
+        self.tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+        self.model = GPT2LMHeadModel.from_pretrained("gpt2")
+        print("Model hazır!")
+
+    def generate_story(self, prompt, max_length=200):
+        """Verilen giriş metnine göre hikaye oluşturur."""
+        input_ids = self.tokenizer.encode(prompt, return_tensors="pt")
+        
+        # Metni üret
+        output = self.model.generate(
+            input_ids,
+            max_length=max_length,
+            num_return_sequences=1,
+            no_repeat_ngram_size=2,
+            temperature=0.8,
+            top_k=50,
+            top_p=0.95,
+            pad_token_id=self.tokenizer.eos_token_id
+        )
+        
+        generated_text = self.tokenizer.decode(output[0], skip_special_tokens=True)
+        return generated_text
+
+
+def main():
+    generator = StoryGenerator()
+    
+    print("\n=== Otomatik Hikaye Üreteci ===")
+    print("Bir hikaye başlangıcı yazın, ben de devamını getireceğim.")
+    print("Çıkmak için 'q' yazın.")
+    
+    while True:
+        user_input = input("\nHikaye başlangıcı: ")
+        if user_input.lower() == 'q':
+            break
+        
+        if len(user_input) < 5:
+            print("Lütfen daha uzun bir başlangıç yazın (en az 5 karakter).")
+            continue
+        
+        story = generator.generate_story(user_input)
+        print("\nOluşturulan Hikaye:")
+        print("-" * 50)
+        print(story)
+        print("-" * 50)
+
+
+if __name__ == "__main__":
+    main()
