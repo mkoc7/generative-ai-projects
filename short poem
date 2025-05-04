@@ -1,0 +1,14 @@
+from transformers import pipeline
+
+# Load the text generation pipeline (starting with a small model)
+generator = pipeline("text-generation", model="gpt2")
+
+keyword = input("Enter a keyword: ")
+
+prompt = f"A short poem about {keyword}:\n"
+
+# Generate poetry
+result = generator(prompt, max_length=50, num_return_sequences=1)
+
+print("Generated Poem:\n")
+print(result[0]['generated_text'])
