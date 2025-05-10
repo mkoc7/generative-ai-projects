@@ -1,0 +1,56 @@
+import random
+from collections import defaultdict
+
+class MarkovChain:
+    def __init__(self):
+        # Kelimelerin takip olasılıklarını saklayacak veri yapısı
+        self.transitions = defaultdict(list)
+    
+    def train(self, text):
+        # Metni kelime kelime ayırıyoruz
+        words = text.split()
+        
+        # Her kelime çiftini işleyelim
+        for i in range(len(words) - 1):
+            current_word = words[i]
+            next_word = words[i + 1]
+            
+            # Geçişleri kaydedelim
+            self.transitions[current_word].append(next_word)
+    
+    def generate_text(self, start_word, length=50):
+        if start_word not in self.transitions:
+            return "Başlangıç kelimesi eğitim verisinde bulunamadı!"
+        
+        result = [start_word]
+        current_word = start_word
+        
+        # İstenen uzunlukta metin oluşturalım
+        for _ in range(length - 1):
+            if current_word not in self.transitions or not self.transitions[current_word]:
+                break
+                
+            # Mevcut kelimeden sonra gelebilecek kelimelerden rastgele seçim yapıyoruz
+            next_word = random.choice(self.transitions[current_word])
+            result.append(next_word)
+            current_word = next_word
+            
+        return " ".join(result)
+
+# Test edelim
+if __name__ == "__main__":
+    # Eğitim metni
+    training_text = """
+    Yapay zeka dünyası çok hızlı gelişiyor. Yapay zeka modelleri her gün daha akıllı hale geliyor.
+    Yapay zeka teknolojisi hayatımızı kolaylaştıran birçok uygulama sunuyor. Teknoloji dünyası
+    yapay zeka ile dönüşüyor. Her gün yeni bir yapay zeka modeli duyuyoruz.
+    """
+    
+    # Markov zinciri oluştur ve eğit
+    markov = MarkovChain()
+    markov.train(training_text)
+    
+    # Yeni metin oluştur
+    generated_text = markov.generate_text("Yapay", 20)
+    print("Üretilen metin:")
+    print(generated_text)
